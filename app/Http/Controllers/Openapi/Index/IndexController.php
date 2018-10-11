@@ -6,7 +6,7 @@
  * Time: 10:41
  */
 
-namespace App\Http\Controllers\Api\Index;
+namespace App\Http\Controllers\Openapi\Index;
 
 
 use App\Http\Controllers\Controller;
@@ -18,6 +18,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return ['index'];
+        return ['openapi index'];
     }
 }

@@ -1,5 +1,10 @@
 <?php
 
+$prefix = null;
+if(isset($_SERVER['PATH_INFO'])){
+    $pathInfo = explode('/', $_SERVER['PATH_INFO']);
+    $prefix = isset($pathInfo[0]) ?  $pathInfo[1] : null;
+}
 
 return [
 
@@ -58,7 +63,7 @@ return [
     |
     */
 
-    'prefix' => env('API_PREFIX', null),
+    'prefix' => env('API_PREFIX', $prefix),
 
     /*
     |--------------------------------------------------------------------------

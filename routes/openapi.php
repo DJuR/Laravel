@@ -13,16 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function ($api) {
+$api->version('v1', ['prefix' => 'openapi'], function ($api) {
 
-    $api->group(['namespace' => 'App\Http\Controllers\Api',], function($api){
+    $api->group(['namespace' => 'App\Http\Controllers\Openapi',], function($api){
         $api->get('index', 'Index\IndexController@index');
     });
 
