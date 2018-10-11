@@ -1,11 +1,11 @@
 <?php
 
-$prefix = null;
+$prefix = 'api';
 if(isset($_SERVER['PATH_INFO'])){
     $pathInfo = explode('/', $_SERVER['PATH_INFO']);
-    $prefix = isset($pathInfo[0]) ?  $pathInfo[1] : null;
+    $prefix = isset($pathInfo[1]) && in_array($pathInfo[1], ['api', 'openapi'])
+        ? $pathInfo[1] : 'api';
 }
-
 return [
 
     /*
