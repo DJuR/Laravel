@@ -10,14 +10,24 @@ namespace App\Http\Controllers\Api\Index;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\User\User;
+use Illuminate\Auth\TokenGuard;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      *
      */
     public function index()
     {
-        return ['index'];
+
+        return ($this->user->find(1));
     }
 }
