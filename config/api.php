@@ -1,5 +1,6 @@
 <?php
 
+
 $prefix = 'api';
 if(isset($_SERVER['PATH_INFO'])){
     $pathInfo = explode('/', $_SERVER['PATH_INFO']);

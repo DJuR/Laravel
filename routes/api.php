@@ -24,7 +24,7 @@ $api->version('v1', function ($api) {
         'namespace' => 'App\Http\Controllers\Api',
         'middleware' => 'auth:api',
     ], function($api){
-        $api->get('index', 'Index\IndexController@index');
+        $api->get('index', ['as' => 'index'], 'Index\IndexController@index');
     });
 
 
@@ -32,15 +32,20 @@ $api->version('v1', function ($api) {
     $api->group([
         'namespace' => 'App\Http\Controllers\Api',
     ], function($api){
-
+        Illuminate\Routing\UrlGenerator::class;
         // 登录
-        $api->post('login', 'User\LoginController@login')->name('login');
+        $api->post('login', ['as' => 'login'], 'User\LoginController@login')->name('login');
         // 退出登录
-        $api->get('logout', 'User\LoginController@logout')->name('logout');
+        $api->get('logout', ['as' => 'logout'],' User\LoginController@logout')->name('logout');
         // 刷新token
-        $api->get('refresh', 'User\LoginController@refresh')->name('refresh');
+        $api->get('refresh', ['as' => 'refresh'], 'User\LoginController@refresh')->name('refresh');
         // me
-        $api->get('me', 'User\LoginController@me')->name('me');
+        $api->get('me', ['as' => 'me'], 'User\LoginController@me');
+
+        // test
+        $api->get('test', function(){
+            url()->route('me');
+        });
 
 
     });

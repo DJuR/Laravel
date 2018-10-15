@@ -74,10 +74,10 @@ return [
             'model' => App\Models\User\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'admin' => [
+             'driver' => 'database',
+             'table' => 'users',
+         ],
     ],
 
     /*

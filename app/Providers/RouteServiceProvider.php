@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Config\Repository;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -35,15 +36,24 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        // openapi
-        $this->mapOpenapiRoutes();
-
-        // backend
-        $this->mapBackendRoutes();
+       /* Repository ::class;
+        echo '<pre>';
+        var_dump($this->app['config']->get('api')['prefix']);die;*/
+        $prefix = $this->app['config']->get('api')['prefix'];
+        switch ($prefix){
+            case 'api':
+                $this->mapApiRoutes();
+                break;
+            case 'openapi':
+                $this->mapOpenapiRoutes();
+                break;
+            case 'web':
+                $this->mapWebRoutes();
+                break;
+            case 'Backend':
+                $this->mapBackendRoutes();
+                break;
+        }
     }
 
     /**
