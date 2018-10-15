@@ -12,7 +12,9 @@
 */
 
 $api = app('Dingo\Api\Routing\Router');
+Dingo\Api\Routing\Router::class;
 
+var_dump($api->prefix);die;
 $api->version('v1', function ($api) {
 
     // 登陆可访问
@@ -43,8 +45,6 @@ $api->version('v1', function ($api) {
     ], function($api){
         // 登录
         $api->post('login', ['as' => 'login', 'uses' => 'User\LoginController@login']);
-
-
 
     });
 
