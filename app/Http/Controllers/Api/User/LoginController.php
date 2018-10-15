@@ -10,8 +10,8 @@ namespace App\Http\Controllers\Api\User;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\User\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -27,8 +27,10 @@ class LoginController extends Controller
     /**
      * 用户登陆
      */
-    public function login(User $user)
+    public function login(Request $request)
     {
-        var_dump(Auth::login($user));
+        $credentials = $request->only('email', 'password');
+
+        return $token = JWTAuth::attempt($credentials);
     }
 }

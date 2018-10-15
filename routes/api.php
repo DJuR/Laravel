@@ -41,9 +41,9 @@ $api->version('v1', function ($api) {
 
     // 登陆未登陆都可访问
     $api->group([
-        'namespace' => 'App\Http\Controllers\Auth',
+        'namespace' => 'App\Http\Controllers\Api',
     ], function($api){
-        $api->post('login', 'Api\LoginController@login')->name('login');
+        $api->post('login', 'User\LoginController@login')->name('login');
 
         $api->post('reset', 'Api\ResetPasswordController@reset')->name('reset');
 
