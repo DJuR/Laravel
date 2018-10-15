@@ -24,28 +24,26 @@ $api->version('v1', function ($api) {
         'namespace' => 'App\Http\Controllers\Api',
         'middleware' => 'auth:api',
     ], function($api){
-        $api->get('index', ['as' => 'index'], 'Index\IndexController@index');
+        // 首页
+        $api->get('index', ['as' => 'index', 'uses' => 'Index\IndexController@index']);
+
+        // 退出登录
+        $api->get('logout', ['as' => 'logout', 'uses' => ' User\LoginController@logout']);
+        // 刷新token
+        $api->get('refresh', ['as' => 'refresh','uses' => 'User\LoginController@refresh']);
+        // me
+        $api->get('me', ['as' => 'me','uses' => 'User\LoginController@me']);
+
     });
 
 
-    // 登陆未登陆都可访问
+    // 未登陆都可访问
     $api->group([
         'namespace' => 'App\Http\Controllers\Api',
     ], function($api){
-        Illuminate\Routing\UrlGenerator::class;
         // 登录
-        $api->post('login', ['as' => 'login'], 'User\LoginController@login')->name('login');
-        // 退出登录
-        $api->get('logout', ['as' => 'logout'],' User\LoginController@logout')->name('logout');
-        // 刷新token
-        $api->get('refresh', ['as' => 'refresh'], 'User\LoginController@refresh')->name('refresh');
-        // me
-        $api->get('me', ['as' => 'me'], 'User\LoginController@me');
+        $api->post('login', ['as' => 'login', 'uses' => 'User\LoginController@login']);
 
-        // test
-        $api->get('test', function(){
-            url()->route('me');
-        });
 
 
     });
