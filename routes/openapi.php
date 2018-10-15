@@ -24,5 +24,14 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
         $api->get('index', 'Index\IndexController@index');
     });
 
+    // 未登陆都可访问
+    $api->group([
+        'namespace' => 'App\Http\Controllers\Openapi',
+    ], function($api){
+        // 登录
+        $api->post('login', ['as' => 'login', 'uses' => 'Admin\LoginController@login']);
+
+    });
+
 
 });

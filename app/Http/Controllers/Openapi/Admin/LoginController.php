@@ -10,6 +10,9 @@ namespace App\Http\Controllers\Openapi\Admin;
 
 
 use App\Http\Controllers\Controller;
+use Dingo\Api\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class LoginController extends Controller
 {
