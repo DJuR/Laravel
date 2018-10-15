@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -46,9 +45,9 @@ return [
             'provider' => 'users',
         ],
 
-        'aopenpi' => [
-            'driver' => 'token',
-            'provider' => 'users',
+        'openapi' => [
+            'driver' => 'jwt',
+            'provider' => 'admin',
         ],
     ],
 

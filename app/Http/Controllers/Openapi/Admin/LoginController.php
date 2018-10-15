@@ -2,24 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: dingjuru
- * Date: 2018/10/13
- * Time: 15:28
+ * Date: 2018/10/15
+ * Time: 14:34
  */
 
-namespace App\Http\Controllers\Api\User;
+namespace App\Http\Controllers\Openapi\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+
     }
 
     /**

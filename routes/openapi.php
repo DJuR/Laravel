@@ -17,7 +17,10 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['prefix' => 'openapi'], function ($api) {
 
-    $api->group(['namespace' => 'App\Http\Controllers\Openapi',], function($api){
+    $api->group([
+        'namespace' => 'App\Http\Controllers\Openapi',
+        'middleware' => 'auth:openapi'
+    ], function($api){
         $api->get('index', 'Index\IndexController@index');
     });
 

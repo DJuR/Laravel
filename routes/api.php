@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,14 +10,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-Illuminate\Auth\AuthManager::class;
-Illuminate\Contracts\Auth\UserProvider::class;
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 $api = app('Dingo\Api\Routing\Router');
 
@@ -37,7 +27,6 @@ $api->version('v1', function ($api) {
         $api->get('index', 'Index\IndexController@index');
     });
 
-    Illuminate\Container\Container::class;
 
     // 登陆未登陆都可访问
     $api->group([
