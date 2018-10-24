@@ -30,6 +30,7 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
     ], function($api){
         // 登录
         $api->post('login', ['as' => 'login', 'uses' => 'Admin\LoginController@login']);
+        $api->get('l', ['as' => 'l', 'uses' => 'Admin\LoginController@login']);
 
     });
 

@@ -14,7 +14,7 @@
 $api = app('Dingo\Api\Routing\Router');
 Dingo\Api\Routing\Router::class;
 
-var_dump($api->prefix);die;
+
 $api->version('v1', function ($api) {
 
     // 登陆可访问

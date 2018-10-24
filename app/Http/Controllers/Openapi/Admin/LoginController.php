@@ -11,14 +11,16 @@ namespace App\Http\Controllers\Openapi\Admin;
 
 use App\Http\Controllers\Controller;
 use Dingo\Api\Http\Request;
+use Illuminate\Auth\SessionGuard;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Providers\Auth\Illuminate;
 
 
 class LoginController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth:openapi', ['except' => ['login']]);
     }
 
     /**
@@ -35,6 +37,10 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
+        \Tymon\JWTAuth\JWTAuth::class;
+
+
+        Illuminate::class;
 
         if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized', 'status' => 401], 401);
