@@ -46,6 +46,11 @@ $api->version('v1', function ($api) {
         // 登录
         $api->post('login', ['as' => 'login', 'uses' => 'User\LoginController@login']);
 
+        // 测试
+        $api->get('/', function(){
+            return 'This is API module.';
+        });
+
     });
 
 

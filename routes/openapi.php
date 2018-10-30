@@ -32,6 +32,11 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
         $api->post('login', ['as' => 'login', 'uses' => 'Admin\LoginController@login']);
         $api->get('l', ['as' => 'l', 'uses' => 'Admin\LoginController@login']);
 
+        // 测试
+        $api->get('/', function(){
+            return 'This is OPENAPI module.';
+        });
+
     });
 
 

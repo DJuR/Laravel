@@ -9,6 +9,16 @@
 
 define('LARAVEL_START', microtime(true));
 
+// 设置 API_PREFIX
+$prefix = 'api';
+if(isset($_SERVER['PATH_INFO'])){
+    $pathInfo = explode('/', $_SERVER['PATH_INFO']);
+    $prefix = isset($pathInfo[1])
+        ? $pathInfo[1] : '';
+
+}
+putenv("API_PREFIX={$prefix}");
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
