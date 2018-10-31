@@ -6,7 +6,7 @@
  * Time: 14:34
  */
 
-namespace App\Http\Controllers\Openapi\Auth;
+namespace App\Http\Controllers\Openapi;
 
 
 use App\Http\Controllers\Controller;
@@ -19,17 +19,23 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
-
-    use AuthenticatesUsers;
 
     public function __construct()
     {
         $this->middleware('auth:openapi', ['except' => ['login', 'register']]);
     }
 
-   public function login(Request $request)
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(Request $request)
     {
         $rules = [
             'email'   => [

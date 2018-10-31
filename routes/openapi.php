@@ -21,6 +21,13 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
         'namespace' => 'App\Http\Controllers\Openapi',
         'middleware' => ['auth:openapi']
     ], function($api){
+
+        /****************************
+         *          User/user       *
+         ****************************/
+        // 用户信息
+        $api->get('user', ['as' => 'user', 'uses' => 'User\UserController@view']);
+
         // 首页
         $api->get('index', ['as' => 'index', 'uses' => 'Index\IndexController@index']);
     });
@@ -33,18 +40,18 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
          *          Auth            *
          ****************************/
         // 登录
-        $api->post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+        $api->post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 
         // 注册
-        $api->post('register', ['as' => 'register', 'uses' => 'Auth\LoginController@register']);
+        $api->post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
 
         // 刷新token
-        $api->post('refresh', ['as' => 'refresh', 'uses' => 'Auth\LoginController@refresh']);
+        $api->post('refresh', ['as' => 'refresh', 'uses' => 'AuthController@refresh']);
 
         // 重置密码
-        $api->post('reset', ['as' => 'reset', 'uses' => 'Auth\LoginController@reset']);
+        $api->post('reset', ['as' => 'reset', 'uses' => 'AuthController@reset']);
 
-        $api->get('l', ['as' => 'l', 'uses' => 'Admin\LoginController@login']);
+
 
         // 测试
         $api->get('/', function(){
