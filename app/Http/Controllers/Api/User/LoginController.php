@@ -11,15 +11,19 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
 
+    use AuthenticatesUsers;
+
     public function __construct()
     {
-        //$this->middleware('auth:api', ['except' => ['login']]);
+       // var_dump($this->middleware('auth:openapi', ['except' => ['logins']]));
     }
 
     /**
@@ -37,7 +41,7 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = JWTAuth::attempt($credentials)) {
+        if (! $token = $this->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized', 'status' => 401], 401);
         }
 
@@ -90,5 +94,10 @@ class LoginController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('api');
     }
 }

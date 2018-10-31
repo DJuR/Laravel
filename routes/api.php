@@ -24,7 +24,7 @@ $api->version('v1', function ($api) {
 
     $api->group([
         'namespace' => 'App\Http\Controllers\Api',
-        'middleware' => 'auth:api',
+        'middleware' => ['auth:api'],
     ], function($api){
         // 首页
         $api->get('index', ['as' => 'index', 'uses' => 'Index\IndexController@index']);

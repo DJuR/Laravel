@@ -19,9 +19,10 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
 
     $api->group([
         'namespace' => 'App\Http\Controllers\Openapi',
-        'middleware' => 'auth:openapi'
+        'middleware' => ['auth:openapi']
     ], function($api){
-        $api->get('index', 'Index\IndexController@index');
+        // 首页
+        $api->get('index', ['as' => 'index', 'uses' => 'Index\IndexController@index']);
     });
 
     // 未登陆都可访问
@@ -30,6 +31,7 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
     ], function($api){
         // 登录
         $api->post('login', ['as' => 'login', 'uses' => 'Admin\LoginController@login']);
+
         $api->get('l', ['as' => 'l', 'uses' => 'Admin\LoginController@login']);
 
         // 测试

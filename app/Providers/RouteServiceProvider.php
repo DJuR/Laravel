@@ -36,9 +36,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-       /* Repository ::class;
-        echo '<pre>';
-        var_dump($this->app['config']->get('api')['prefix']);die;*/
         $prefix = $this->app['config']->get('api')['prefix'];
         switch ($prefix){
             case 'api':

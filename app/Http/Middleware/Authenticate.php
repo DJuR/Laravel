@@ -16,4 +16,9 @@ class Authenticate extends Middleware
     {
         return route('index');
     }
+
+    public function guard($name = null)
+    {
+
+    }
 }
