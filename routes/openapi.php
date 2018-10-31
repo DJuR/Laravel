@@ -29,8 +29,20 @@ $api->version('v1', ['prefix' => 'openapi'], function ($api) {
     $api->group([
         'namespace' => 'App\Http\Controllers\Openapi',
     ], function($api){
+        /****************************
+         *          Auth            *
+         ****************************/
         // 登录
-        $api->post('login', ['as' => 'login', 'uses' => 'Admin\LoginController@login']);
+        $api->post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+
+        // 注册
+        $api->post('register', ['as' => 'register', 'uses' => 'Auth\LoginController@register']);
+
+        // 刷新token
+        $api->post('refresh', ['as' => 'refresh', 'uses' => 'Auth\LoginController@refresh']);
+
+        // 重置密码
+        $api->post('reset', ['as' => 'reset', 'uses' => 'Auth\LoginController@reset']);
 
         $api->get('l', ['as' => 'l', 'uses' => 'Admin\LoginController@login']);
 

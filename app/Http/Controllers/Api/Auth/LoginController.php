@@ -1,29 +1,28 @@
 <?php
 /**
- * Created by PhpStorm.
+ * 登录
  * User: dingjuru
- * Date: 2018/10/15
- * Time: 14:34
+ * Date: 2018/10/13
+ * Time: 15:28
  */
 
-namespace App\Http\Controllers\Openapi\Admin;
+namespace App\Http\Controllers\Api\Auth;
 
 
 use App\Http\Controllers\Controller;
-use Dingo\Api\Http\Request;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
 
     public function __construct()
     {
-        $this->middleware('auth:openapi', ['except' => ['login']]);
+       $this->middleware('auth:openapi', ['except' => ['login']]);
     }
 
     /**
@@ -34,26 +33,19 @@ class LoginController extends Controller
 
     }
 
-   public function login(Request $request)
+    /**
+     * 用户登陆
+     */
+    public function login(Request $request)
     {
-        // 验证规则，由于业务需求，这里我更改了一下登录的用户名，使用手机号码登录
-        $rules = [
-            'email'   => [
-                'required',
-                'exists:admin'
-            ],
-            'password' => 'required|string|min:6|max:20',
-        ];
+        $credentials = request(['email', 'password']);
 
-        // 验证参数，如果验证失败，则会抛出 ValidationException 的异常
-        $params = $this->validate($request, $rules);
+        if (! $token = $this->guard()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized', 'status' => 401], 401);
+        }
 
-        // 使用 Auth 登录用户，如果登录成功，则返回 201 的 code 和 token，如果登录失败则返回
-        return ($token = $this->guard()->attempt($params))
-            ? $this->respondWithToken($token)
-            : response(['error' => '账号或密码错误'], 400);
+        return $this->respondWithToken($token);
     }
-
 
     /**
      * Get the authenticated User.
@@ -99,18 +91,12 @@ class LoginController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('openapi')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
     protected function guard()
     {
-        return Auth::guard('openapi');
+        return Auth::guard('api');
     }
-
 }
