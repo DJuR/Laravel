@@ -43,8 +43,14 @@ $api->version('v1', function ($api) {
     $api->group([
         'namespace' => 'App\Http\Controllers\Api',
     ], function($api){
+        /********************
+         *      Auth        *
+         ********************/
         // 登录
-        $api->post('login', ['as' => 'login', 'uses' => 'User\LoginController@login']);
+        $api->post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+
+        // 注册
+        $api->post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
 
         // 测试
         $api->get('/', function(){
