@@ -54,7 +54,7 @@ $api->version('v1', function ($api) {
 
         // 测试
         $api->get('/', function(){
-            return 'This is API module.';
+            return 'This is Api Module.';
         });
 
     });
