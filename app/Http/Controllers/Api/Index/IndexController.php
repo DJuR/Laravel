@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api\Index;
 
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessPodcast;
 use App\Models\User\User;
 
 class IndexController extends Controller
@@ -27,5 +28,12 @@ class IndexController extends Controller
     {
 
         return ($this->user->find(1));
+    }
+
+    public function s()
+    {
+        $data = User::limit(1)->get();
+        #ProcessPodcast::dispatch($data)->delay(now()->addMinute(10));
+        ProcessPodcast::dispatch($data);
     }
 }
