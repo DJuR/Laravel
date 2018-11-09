@@ -53,9 +53,7 @@ $api->version('v1', function ($api) {
         $api->post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
 
         // 测试
-        $api->get('/', function(){
-            return 'This is Api Module.';
-        });
+        $api->get('store', 'Index\IndexController@s');
 
     });
 
