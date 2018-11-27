@@ -15,6 +15,7 @@ $api = app('Dingo\Api\Routing\Router');
 Dingo\Api\Routing\Router::class;
 
 
+
 $api->version('v1', function ($api) {
 
     // 登陆可访问
@@ -54,6 +55,9 @@ $api->version('v1', function ($api) {
 
         // 测试
         $api->get('store', 'Index\IndexController@s');
+
+
+        $api->get('test/md5/index', 'Test\Md5Controller@index');
 
     });
 
