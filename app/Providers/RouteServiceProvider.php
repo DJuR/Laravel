@@ -46,8 +46,10 @@ class RouteServiceProvider extends ServiceProvider
                 break;
             case 'web':
                 $this->mapWebRoutes();
+            case 'm':
+                $this->mapMRoutes();
                 break;
-            case 'Backend':
+            case 'backend':
                 $this->mapBackendRoutes();
                 break;
         }
@@ -81,6 +83,21 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware(['api'])
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "m" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapMRoutes()
+    {
+        Route::prefix('m')
+            ->middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/m.php'));
     }
 
     /**

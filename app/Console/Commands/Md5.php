@@ -48,12 +48,12 @@ class Md5 extends Command
      */
     public function handle()
     {
-        $i = 1;
+       // $i = 1;
         while (true) {
 
             $a = microtime(true);
 
-            $str = $this->randStr(4);
+            $str = $this->randStr(mt_rand(4, 8));
 
             $isExist = DB::table('md5')->where('str', $str)->exists();
             if($isExist){
@@ -65,8 +65,10 @@ class Md5 extends Command
                 'md5_str' => md5($str),
             ]);
             $b = microtime(true);
-            var_dump( $i.'=>str:'.$str.'===='.round($b-$a, 3));
-            $i++;
+            //var_dump( $i.'=>str:'.$str.'===='.round($b-$a, 3));
+            //$i++;
+
+            sleep(0.01);
         }
 
     }

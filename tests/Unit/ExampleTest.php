@@ -15,5 +15,13 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $this->assertTrue(true);
+
+        sleep(1);
+        return json_encode(['aaa']);
+        //$response = $this->get('/');
+
+        //$response->assertStatus(200);
+
+
     }
 }
